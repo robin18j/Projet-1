@@ -1,5 +1,5 @@
 let mail_box = [];
-let conteur = -1;
+let conteur = 0;
 
 
 function ADD_Email_to_mailbox() {
@@ -18,14 +18,6 @@ function ADD_Email_to_mailbox() {
     print_email()
 
 }
-
-function select_Email () {
-let text = "<ul>";
-for (let i = 0; i < mail_box.length; i++) {
-    text += "<li>" + mail_box[i] + "</li>";
-}
-text += "</ul>";
-}// va etre relier avec l'endroit'
 
 //ceci devrait permettre devoyer les nouvelle element et de les imprimer sur une liste
 function print_text() {
@@ -59,4 +51,25 @@ function suprimer(e) {
     }
 localStorage.setItem("mail_box", JSON.stringify(list));
     document.getElementById("contenu").innerHTML = text;
+}
+function search() {
+    let list = JSON.parse(localStorage.getItem("mail_box"));
+    let text = '<caption>boite de message</caption>\n<tr> <th>nom</th><th>sujet</th><th> email</th> <th>option</th> </tr>\n';
+    let word = document.getElementById("search").value
+    let y = []
+    
+    for (let i = 0; i < list.length; i++) {
+        if (word == list[i].fristname || word == list[i].sujet || word == list[i].adress) {
+            y.push(i)
+        }
+    }
+    if (y.length == 0) {
+        setValue("search", "no match")
+        
+    }
+    for (let h in y)
+        for (let i = 0; i < list.length; i++) {
+            if (y[h]==i)
+        text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td><td>" + list[i].adress + "</td><td>" + "<button  onclick='suprimer(" + i + ")' >Delete</button>" + "<button>lire</button>"/* function pour suprimer*/ + "</td></tr>\n";
+    }
 }
