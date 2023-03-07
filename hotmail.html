@@ -1,113 +1,194 @@
 <!DOCTYPE html>
-<html lang ="en">
+<html lang="en">
 <head>
-<meta charset="utf -8">
-<meta name = "viewport" content = "withdevice . width,initial-scale+1.0">
-<title>document</title>
+    <meta charset="utf -8">
+    <meta name="viewport" content="withdevice . width,initial-scale+1.0">
+    <title>document</title>
 </head>
 
 
 <style>
-  .{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "montserrat";
+    . {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "montserrat";
+    }
 
-}
-section{
-    height: 100vb;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-}
-.container{
-    width: 90%;
-    max-width: 500px;
-    margin:0 auto;
-    padding: 20px;
-    box-shadow: 0px 0px 20px    #00000010;
-    background-color: #f2f2f2;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    section {
+        height: 100vb;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
 
-}
-.form-group{
-    width: 100%;
-    margin-top: 20px;
-    font-size: 20px;
-}
-.form-group textarea{
-    width: 100%;
-    padding: 5px;
-    font-size: 10px;
-    border: 1px  rgb( rgba(0, 47, 255, 0.514));
-    margin-top: 5px;
-    
-}
-textarea{
-  resize: vertical;
+    .container {
+        width: 90%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        box-shadow: 0px 0px 20px #00000010;
+        background-color: #f2f2f2;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
 
-}
-buttom (type= "submit") {
-  width : 100%;
-  border : none;
-  outline : none;
-  padding : 20px;
-  font-size :24px;
-  border-radius :8px;
-  font-family : "montserrat";
-  color : rgba(225, 0, 255, 0.363);
-  text-align : center;
-  cursor : pointer;
-  margin-top :10px;
- }
-button (type = "submit" ):hover{
-  background-color:blue;
- }
-.statu {
-  width: 90%;
-  max-width: 500px;
-  text-align : center;
-  padding : 10px;
-  margin : 0 auto;
-  border-radius : 8px;
-}
-.statu.sucess {
-  background-color: rgb(red, green, blue);
-}
-.statu.error{
-  background-color: aquamarine;
-  color: #f2f2f2;
-}
+    .form-group {
+        width: 100%;
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 5px;
+            font-size: 10px;
+            border: 1px rgb( rgba(0, 47, 255, 0.514));
+            margin-top: 5px;
+        }
+
+    textarea {
+        resize: vertical;
+    }
+
+    buttom (type= "submit") {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 20px;
+        font-size: 24px;
+        border-radius: 8px;
+        font-family: "montserrat";
+        color: rgba(225, 0, 255, 0.363);
+        text-align: center;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    button (type = "submit" ):hover {
+        background-color: blue;
+    }
+
+    .statu {
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+        padding: 10px;
+        margin: 0 auto;
+        border-radius: 8px;
+    }
+
+        .statu.sucess {
+            background-color: rgb(red, green, blue);
+        }
+
+        .statu.error {
+            background-color: aquamarine;
+            color: #f2f2f2;
+        }
 </style>
 <body>
+    <script >let mail_box = [];
+        let conteur = 0;
+
+
+        function ADD_Email_to_mailbox() {
+            let New_Email = {
+                fristname: document.getElementById("firstname").value,
+                sujet: document.getElementById("sujet").value,
+                adress: document.getElementById("email").value,
+                text: document.getElementById("message").value,
+                test: conteur
+            };
+            console.log(New_Email)
+
+            conteur++;
+            mail_box.push(New_Email);
+            let store = JSON.stringify(mail_box);
+            localStorage.setItem("mail_box", store);
+            console.log(localStorage);
+            let list = JSON.parse(localStorage.getItem("mail_box"));
+            console.log(list);
+            print_email()
+
+        }
+
+        //ceci devrait permettre devoyer les nouvelle element et de les imprimer sur une liste
+
+
+        function print_email() {
+            let list = JSON.parse(localStorage.getItem("mail_box"));
+
+            let text = '<caption>boite de message</caption>\n<tr> <th>nom</th><th>sujet</th> <th> email</th> <th>option</th> </tr>\n';
+            for (let i = 0; i < list.length; i++) {
+                text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td>" + "<td>" + list[i].adress + "</td><td>" + "<button onclick='suprimer(" + i + ")' >Delete</button>" + "<button>lire</button>"/* function pour suprimer*/ + "</td></tr>\n";
+            }
+            document.getElementById("contenu").innerHTML = text;
+            console.log(text);
+        }
+        function suprimer(e) {
+            let list = JSON.parse(localStorage.getItem("mail_box"));
+            list.splice(e, 1);
+            let text = '<caption>boite de message</caption>\n<tr> <th>nom</th><th>sujet</th> <th> email</th> <th>option</th> </tr>\n';
+            for (let i = 0; i < list.length; i++) {
+                text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td>" + "<td>" + list[i].adress + "</td><td>" + "<button onclick='suprimer(" + i + ")' >Delete</button>" + "<button>lire</button>"/* function pour suprimer*/ + "</td></tr>\n";
+            }
+            localStorage.setItem("mail_box", JSON.stringify(list));
+            document.getElementById("contenu").innerHTML = text;
+        }
+        function search() {
+            let list = JSON.parse(localStorage.getItem("mail_box"));
+            let text = '<caption>boite de message</caption>\n<tr> <th>nom</th><th>sujet</th><th> email</th> <th>option</th> </tr>\n';
+            let word = document.getElementById("search").value
+            let y = []
+
+            for (let i = 0; i < list.length; i++) {
+                if (word == list[i].fristname || word == list[i].sujet || word == list[i].adress) {
+                    y.push(i)
+                }
+            }
+            if (y.length == 0) {
+                setValue("search", "no match")
+
+            }
+            for (let h in y)
+                for (let i = 0; i < list.length; i++) {
+                    if (y[h] == i)
+                        text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td><td>" + list[i].adress + "</td><td>" + "<button  onclick='suprimer(" + i + ")' >Delete</button>" + "<button>lire</button>"/* function pour suprimer*/ + "</td></tr>\n";
+                }
+        }</script>
     <section>
-    <div class ="container">
-    <form action="">
-    <div class="form-group">
-    <label for="firstname"> firstname</label>
-    <input type = "text" id ="firstname" name="firstname">
- </div>
- <div class = " form-group">
- <label for="lastname"> lastname</label>
- <input type ="text" id ="lastname" name="lastname">
-  </div>
-  <div class = " form- form-group">
-    <label for="email">email</label>
-    <input type ="email" id ="email" name = "email">
-  </div>
-  <div class="form-group">
- <label for="message">message</label>
-  <input type="text" id="message" name="message">
-  </div>
-  <button type = "submit">submit</button>
-    </form>
-    </div>
-    <div id="statu" class="error">sucess</div>
+        <div class="container">
+            <form action="">
+                <div class="form-group">
+                    <label for="firstname"> firstname</label>
+                    <input type="text" id="firstname" name="firstname"><!--promp firstname-->
+                </div>
+                <div class=" form-group">
+                    <label for="sujet"> sujet</label>
+                    <input type="text" id="sujet" name="sujet"><!--promp last name-->
+                </div>
+                <div class=" form- form-group">
+                    <label for="email">email</label>
+                    <input type="email" id="email" name="email"><!--promp email-->
+                </div>
+                <div class="form-group">
+                    <label for="message">message</label>
+                    <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                </div>
+                <button onclick="ADD_Email_to_mailbox()">submit</button><!-- envoyer-->
+
+            </form>
+        </div>
     </section>
-    <script src="Script1.js"></script>
+    <div>
+
+        <table name="contenu" id="contenu">
+            <caption> boite de message</caption>
+            <tr> <th>nom</th><th>sujet</th> <th> email</th> <th>option</th> </tr>
+        </table>
+    </div>
+
 </body>
 </html>
-

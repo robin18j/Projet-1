@@ -1,5 +1,5 @@
 body{
-    background-color: rgba(222, 196, 255, 0.63);
+    background-color: darkslategrey;
     margin: 0;
     }
  .menu{
@@ -36,18 +36,32 @@ letter-spacing: 0.5px;
     color: #fff;
     opacity: 0.5;
     font-size: 19px;
-
 }
 .search-form{
+    display :flex;
+    flex-direction:column;
    margin-top: 15px;
    float: right;
    margin-right: 100px;
+}
+.user_card {
+    display: grid;
+    grid-template-columns: repeat( auto-fil, minmax(150 px, 1fr));
+    margin-right: 100px;
+    margin-top: 15px;
+    float: right;
 }
 input[type=text]{
  padding: 7px;
  border: none;
  font-size: 16px;
 font-family: sans-serif;
+}
+input[type=shearch]{
+    padding: 7px;
+    border: none;
+    font-size: 16px;
+    font-family: sans-serif;
 }
 button [type = "submit": hover]{
     float: right;
@@ -137,7 +151,19 @@ buttom (type= "submit"){
     background-color: aquamarine;
     color: #f2f2f2;
   }
+.mailB {
+   position:absolute;
+   left : 0px;
+   
+   width :200px;
+   top: 100px;
+   bottom :0px;
+}
 table, caption, th, td {
+    background :rgba(0, 0, 0, 0.897);
     border: 2px solid skyblue;
     color: white;
+}
+th, td {
+    padding : 15px;
 }
