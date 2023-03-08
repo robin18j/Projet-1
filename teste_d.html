@@ -9,11 +9,8 @@
 <body>
     <nav class="menu">
         <ul>
-            <li><a href="#">accueil</a></li><!-- rafraichir onclick apres href-->
             <li><a href="#">contact</a></li> <!-- doit afficher les email et nom qui se trouve dans mail_box-->
-            <li><a href="#">message</a></li><!-- afficher les emails et sujet et doit pouvoir ouvrire ceux-ci-->
-            <li><a href="#">évènements</a></li><!-- determiner-->
-            <li><a href="#"> about</a></li><!--explique les otpions-->
+            
         </ul>
 
 
@@ -67,7 +64,7 @@
 
             let text = '<caption>boite de message</caption>\n<tr> <th>nom</th><th>sujet</th> <th> email</th> <th>option</th> </tr>\n';
             for (let i = 0; i < list.length; i++) {
-                text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td>" + "<td>" + list[i].adress + "</td><td>" + "<button onclick='suprimer(" + i + ")' >Delete</button>" + "<button>lire</button>"/* function pour suprimer*/ + "</td></tr>\n";
+                text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td>" + "<td>" + list[i].adress + "</td><td>" + "<button onclick='suprimer(" + i + ")' >Delete</button>" + "<button onclick='lire(" + i + ")'>lire</button>"/* function pour suprimer*/ + "</td></tr>\n";
             }
             document.getElementById("contenu").innerHTML = text;
             console.log('test');
@@ -78,7 +75,7 @@
             localStorage.removeItem("mail_box");
             let text = '<caption>boite de message</caption>\n<tr> <th>nom</th><th>sujet</th> <th> email</th> <th>option</th> </tr>\n';
             for (let i = 0; i < list.length; i++) {
-                text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td>" + "<td>" + list[i].adress + "</td><td>" + "<button onclick='suprimer(" + i + ")' >Delete</button>" + "<button>lire</button>"/* function pour suprimer*/ + "</td></tr>\n";
+                text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td>" + "<td>" + list[i].adress + "</td><td>" + "<button onclick='suprimer(" + i + ")' >Delete</button>" + "<button onclick='lire(" + i + ")'>lire</button>"/* function pour suprimer*/ + "</td></tr>\n";
             }
             localStorage.setItem("mail_box", JSON.stringify(list));
             mail_box = list;
@@ -93,12 +90,23 @@
            
             for (let i = 0; i < list.length; i++) { 
             if (list[i].fristname == word || list[i].sujet == word || list[i].adress == word) {
-                text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td>" + "<td>" + list[i].adress + "</td><td>" + "<button onclick='suprimer(" + i + ")' >Delete</button>" + "<button>lire</button>"/* function pour suprimer*/ + "</td></tr>\n";
+                text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td>" + "<td>" + list[i].adress + "</td><td>" + "<button onclick='suprimer(" + i + ")' >Delete</button>" + "<button onclick='lire(" + i + ")'>lire</button>"/* function pour suprimer*/ + "</td></tr>\n";
                 console.log('positif')
-            }
+                }
+            
             }
             document.getElementById("contenu").innerHTML = text;
-        }</script>
+        }
+        function lire(e) {
+          /*  let list = JSON.parse(localStorage.getItem("mail_box"));
+            document.getElementById("remplacer ici").innerHTML = list[e].firstname;
+            document.getElementById("remplacer ici").innerHTML = list[e].sujet;
+            document.getElementById("remplacer ici").innerHTML = list[e].adress;
+            document.getElementById("remplacer ici").innerHTML = list[e].text;
+            */
+        }
+
+    </script>
     <div>
 
         <table class="mailB" name="contenu" id="contenu">
