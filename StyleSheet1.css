@@ -1,0 +1,180 @@
+﻿body {
+    background-color: darkslategrey;
+    margin: 0;
+}
+
+.menu {
+    width: 100%;
+    background: #142b47;
+    overflow: auto;
+}
+
+    .menu ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        line-height: 60px;
+    }
+
+    .menu li {
+        float: left;
+    }
+
+    .menu ul li a {
+        background-color: #142b47;
+        text-decoration: none;
+        width: 130px;
+        display: block;
+        text-align: center;
+        color: #f2f2f2;
+        font-size: 18px;
+        font-family: sans-serif;
+        letter-spacing: 0.5px;
+    }
+
+    .menu li a:hover {
+        color: #fff;
+        opacity: 0.5;
+        font-size: 19px;
+    }
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    float: right;
+    margin-right: 100px;
+}
+
+input[type=text] {
+    padding: 7px;
+    border: none;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+input[type=shearch] {
+    padding: 7px;
+    border: none;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+button [type = "submit": hover] {
+    float: right;
+    background-color: rgba(0, 0, 0, 0.897);
+    color: white;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    position: relative;
+    padding: 7px;
+    font-family: sans-serif;
+    border: none;
+    font-size: 16px;
+}
+
+. {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "montserrat";
+}
+
+section {
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0px 0px 20px #00000010;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+    .form-group textarea {
+        width: 100%;
+        padding: 5px;
+        font-size: 10px;
+        border: 1px rgba(128, 128, 128, 199);
+        margin-top: 5px;
+    }
+
+.textarea {
+    resize: vertical;
+}
+
+buttom (type= "submit") {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 20px;
+    font-size: 24px;
+    border-radius: 8px;
+    font-family: "sans shérif";
+    color: bisque;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button {
+    background-color: grey;
+}
+
+.statu {
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    padding: 10px;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+    .statu.sucess {
+        background-color: rgb(red, green, blue);
+    }
+
+    .statu.error {
+        background-color: aquamarine;
+        color: #f2f2f2;
+    }
+
+.mailB {
+    position: absolute;
+    left: 0px;
+    width: 200px;
+    top: 100px;
+    bottom: 0px;
+}
+
+.carnet {
+    position: absolute;
+    right: 0px;
+    width: 200px;
+    top: 150px;
+    bottom: 0px;
+}
+
+table, caption, th, td {
+    background: rgba(0, 0, 0, 0.897);
+    border: 2px solid skyblue;
+    color: white;
+}
+
+th, td {
+    padding: 15px;
+}
