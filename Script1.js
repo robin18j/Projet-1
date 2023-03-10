@@ -11,8 +11,6 @@ function ADD_Email_to_mailbox() {
         adress: document.getElementById("email").value,
         text: document.getElementById("message").value,
     };
-
-
     mail_box.push(New_Email);
     let store = JSON.stringify(mail_box)
     localStorage.setItem("mail_box", store);
@@ -21,7 +19,6 @@ function ADD_Email_to_mailbox() {
         nom: document.getElementById("firstname").value,
         adresse: document.getElementById("email").value,
     }
-   
     if (pizza.length != 0) {
         let carnet = localStorage.getItem("pizza");
         let dup = false;
@@ -31,7 +28,6 @@ function ADD_Email_to_mailbox() {
                 dup = true;
                 break;
             }
- 
         } 
         if (dup == false) {
             pizza.push(contact);
@@ -40,14 +36,11 @@ function ADD_Email_to_mailbox() {
         pizza.push(contact);
         console.log('0')
     }
-
     let test = JSON.stringify(pizza)
     localStorage.setItem("pizza", test);
     console.log(localStorage);
     contact_carnet();
 };
-//ceci devrait permettre devoyer les nouvelle element et de les imprimer sur une liste
-
 function print_email() {
     let list = JSON.parse(localStorage.getItem("mail_box"));
 
@@ -124,10 +117,31 @@ function modify(e) {
  
     let email = document.getElementById("new_email").value
     let name = document.getElementById("new_name").value
-            list[i].nom = name;
-            list[i].adresse = email;
+            list[e].nom = name;
+    list[e].adresse = email;
+    if (pizza.length != 1) {
+        
+        let dup = false;
+       
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].nom == name && list[i].adresse == email && i !=e) {
+                dup = true;
+                list.splice(e, 1);
+                break;
+            }
+
+        }
+        if (dup == false) {
+            list[e].nom = name;
+            list[e].adresse = email;
+        }
+    } else {
+        list[e].nom = name;
+        list[e].adresse = email;
+    }
     pizza = list;
     localStorage.setItem("pizza", JSON.stringify(list));
+
     reset();
     contact_carnet();
 }
