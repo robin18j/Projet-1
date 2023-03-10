@@ -44,13 +44,7 @@ letter-spacing: 0.5px;
    float: right;
    margin-right: 100px;
 }
-.user_card {
-    display: grid;
-    grid-template-columns: repeat( auto-fil, minmax(150 px, 1fr));
-    margin-right: 100px;
-    margin-top: 15px;
-    float: right;
-}
+
 input[type=text]{
  padding: 7px;
  border: none;
@@ -159,8 +153,15 @@ buttom (type= "submit"){
    top: 100px;
    bottom :0px;
 }
+.carnet {
+    position: absolute;
+    right: 0px;
+    width: 200px;
+    top: 150px;
+    bottom: 0px;
+}
 table, caption, th, td {
-    background :rgba(0, 0, 0, 0.897);
+    background: rgba(0, 0, 0, 0.897);
     border: 2px solid skyblue;
     color: white;
 }

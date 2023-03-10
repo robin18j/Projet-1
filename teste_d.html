@@ -9,7 +9,7 @@
 <body>
     <nav class="menu">
         <ul>
-            <li><a href="#">contact</a></li> <!-- doit afficher les email et nom qui se trouve dans mail_box-->
+            <li><a href="#" >contact</a></li> <!-- doit afficher les email et nom qui se trouve dans mail_box-->
             
         </ul>
 
@@ -23,41 +23,50 @@
     <script>
 
         let mail_box = [];
-        let conteur = 0;
-
+       
+        let pizza = [];
 
         function ADD_Email_to_mailbox() {
             let New_Email = {
                 fristname: document.getElementById("firstname").value,
                 sujet: document.getElementById("sujet").value,
                 adress: document.getElementById("email").value,
-                text: document.getElementById("message").value,
-                test: conteur
+                text: document.getElementById("message").value,  
             };
-            console.log(New_Email)
-
-            conteur++;
+            
+            
             mail_box.push(New_Email);
-            let store = JSON.stringify(mail_box);
-
+            let store = JSON.stringify(mail_box)
             localStorage.setItem("mail_box", store);
+            print_email();
+            let contact = {
+                fristname: document.getElementById("firstname").value,
+                adress: document.getElementById("email").value
+            }
+
+            pizza.push(contact)
+            let unique = [];
+            pizza.forEach((c) => {
+                if (!unique.includes(c)) {
+                    unique.push(c);
+                }
+            });
+            console.log(unique +"test unique");
+          
+            pizza = unique;
+            let test = JSON.stringify(pizza)
+            localStorage.setItem("pizza", test);
             console.log(localStorage);
-            let list = JSON.parse(localStorage.getItem("mail_box"));
-            console.log(list + "parse");
-            print_email()
-
-        }
-        
-       
-        //ceci devrait permettre devoyer les nouvelle element et de les imprimer sur une liste
-
+            contact_carnet();
+        };
+      //ceci devrait permettre devoyer les nouvelle element et de les imprimer sur une liste
 
         function print_email() {
             let list = JSON.parse(localStorage.getItem("mail_box"));
 
             let text = '<caption>boite de message</caption>\n<tr> <th>nom</th><th>sujet</th> <th> email</th> <th>option</th> </tr>\n';
             for (let i = 0; i < list.length; i++) {
-                text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td>" + "<td>" + list[i].adress + "</td><td>" + "<button onclick='suprimer(" + i + ")' >Delete</button>" + "<button onclick='lire(" + i + ")'>lire</button>"/* function pour suprimer*/ + "</td></tr>\n";
+                text += "<tr><td>" + list[i].fristname + "</td><td>" + list[i].sujet + "</td>" + "<td>" + list[i].adress + "</td><td>" + "<button onclick='suprimer(" + i + ")' >Delete</button>" + "<button onclick='lire(" + i + ")'>lire</button>" + "</td></tr>\n";
             }
             document.getElementById("contenu").innerHTML = text;
             console.log('test');
@@ -91,24 +100,60 @@
             document.getElementById("contenu").innerHTML = text;
         }
         function lire(e) {
-          /*  let list = JSON.parse(localStorage.getItem("mail_box"));
-            document.getElementById("remplacer ici").innerHTML = list[e].firstname;
-            document.getElementById("remplacer ici").innerHTML = list[e].sujet;
-            document.getElementById("remplacer ici").innerHTML = list[e].adress;
-            document.getElementById("remplacer ici").innerHTML = list[e].text;
-            */
-        }
+            
+            let list = JSON.parse(localStorage.getItem("mail_box"));
+            console.log(list)
+            let content = "<div>" + "<h2>" + list[e].sujet + "</h2>" + "<p>" + list[e].text + "</p>" + "<button onclick='print_email()' >retour</button>" + "</div>";
 
+            document.getElementById("contenu").innerHTML = content;
+
+        }
+        function contact_carnet() {
+            let list = JSON.parse(localStorage.getItem("pizza"));
+            let text = '<caption>carnet</caption>\n<tr> <th>nom</th><th> email</th> <th>option</th> </tr>\n';
+            console.log(list)
+            for (let i = 0; i < list.length; i++) {
+                text += "<tr><td>" + list[i].firstname + "</td><td>" + list[i].adress + "</td><td>" + " <button onclick= 'fentetre(" + list[i].firstname+','+ list[i].adress + ")' > modify</button >\n";
+            }
+            document.getElementById("carnet").innerHTML = text;
+        }
+        function fentetre(name, adress) {
+            document.getElementById("boite_de_texte").innerHTML = ' <div >\n<div class="form-group">\n<label for="firstname"> mon:' + name + '</label>\n<input type="text" id="new_name" name="new_email">\n</div>\n< div class="form-group" >\n< label for="email" > email:' + adress + '</label >\n< input type = "email" id = "new_email" name = "new_email" >\n</div >\n<div button onclick="modify(' + name + ')" > modify</button > \n</div >\n<div button onclick="reset()" > cancel</button > \n</div >\n';
+        }
+        function reset() {
+            document.getElementById("boite_de_texte").innerHTML = ' <div class="container" id="boite_de_texte">\n< div class="form-group" >\n< label for= "firstname" > firstname</label >\n< input type = "text" id = "firstname" name = "firstname" >\n</div >\n< div class="form-group" >\n< label for= "sujet" > sujet</label >\n< input type = "text" id = "sujet" name = "sujet" >\n</div >\n< div class="form-group" >\n< label for= "email" > email</label >\n< input type = "email" id = "email" name = "email" >\n</div >\n< div class="form-group" >\n< label for= "message" > message</label >\n< textarea name = "message" id = "message" cols = "30" rows = "10" ></textarea >\n</div >\n< button onclick = "ADD_Email_to_mailbox()" > submit</button >\n</div >\n ';
+        }
+        function modify(name) {
+            let test = localStorage.getItem("pizza")
+            let list = JSON.parse(test);
+            localStorage.removeItem("pizza");
+            carnet= []
+            let email = document.getElementById("new_email").value
+            let nom = document.getElementById("new_name").value
+
+            for (let i in list) {
+                if (list[i].firstname == name) {
+                    list[i].fristname = nom;
+                    list[i].adress = email;
+                }
+            }
+            carnet = list;
+            localStorage.setItem("pizza", list);
+            reset();
+        }
     </script>
     <div>
-
+        <table class="carnet" name="carnet" id="carnet">
+            <caption> carne</caption>
+            <tr> <th>nom</th><th> email</th><th>option</th> </tr>
+        </table>
         <table class="mailB" name="contenu" id="contenu">
             <caption> boite de message</caption>
             <tr> <th>nom</th><th>sujet</th> <th> email</th> <th>option</th> </tr>
         </table>
     </div>
     <section>
-        <div class="container">
+        <div class="container" id="boite_de_texte">
 
             <div class="form-group">
                 <label for="firstname"> firstname</label>
